@@ -1,0 +1,3 @@
+{{ $protoName := .Get "name" }}
+{{ $protoDocsUrl := index .Site.Data.ProtoMap.Rel $protoName }}
+<a href="{{ .Site.BaseURL }}{{ $protoDocsUrl }}">{{ $protoName }}</a>
