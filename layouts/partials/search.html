@@ -7,9 +7,9 @@
 		<link href="{{ .Site.Data.Solo.DocsVersion }}{{"css/auto-complete.css" | relURL}}" rel="stylesheet">
 		<script type="text/javascript">
 			{{ if .Site.IsMultiLingual }}
-            var baseurl = window.origin + "{{.Site.BaseURL}}{{.Site.LanguagePrefix}}";
+     var baseurl = window.origin + "{{.Site.Data.Solo.DocsVersion}}{{.Site.LanguagePrefix}}";
 			{{ else }}
-            var baseurl = window.origin + "{{.Site.BaseURL}}";
+     var baseurl = window.origin + "{{.Site.Data.Solo.DocsVersion}}";
 			{{ end }}
 		</script>
 		<script type="text/javascript" src="{{ .Site.Data.Solo.DocsVersion }}{{"js/search.js" | relURL}}"></script>
