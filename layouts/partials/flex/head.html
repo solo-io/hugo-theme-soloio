@@ -17,6 +17,7 @@
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"js/jquery-3.2.1.min.js" | relURL}}"></script>
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"js/jquery-ui-1.12.1.min.js" | relURL}}"></script>
 <script type="text/javascript">
+      // determine baseurl dynamically to allow support deployment to an arbitrary url (esp. during testing)
       var baseurl = window.origin + "{{.Site.Data.Solo.DocsVersion}}";
 </script>
 {{ partial "custom-head.html" . }}
