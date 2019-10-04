@@ -17,6 +17,6 @@
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"js/jquery-3.2.1.min.js" | relURL}}"></script>
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"js/jquery-ui-1.12.1.min.js" | relURL}}"></script>
 <script type="text/javascript">
-      var baseurl = "{{.Site.BaseURL}}";
+      var baseurl = window.origin + "{{.Site.Data.DocsVersion}}";
 </script>
 {{ partial "custom-head.html" . }}
