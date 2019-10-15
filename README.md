@@ -68,3 +68,18 @@ display="consul destination type"
 
 - `layouts/shortcodes/versioned_link_path.html`
 - required in order for links to work (injects version prefix)
+
+
+#### Examples
+
+- in a markdown link
+
+```
+[Gloo Routing]({{< versioned_link_path fromRoot="/gloo_routing" >}})
+```
+
+- in an `href`
+
+```
+<a href="docker-compose-file"><img src='{{% versioned_link_path fromRoot="/img/docker.png" %}}' width="60"/></a>
+```
