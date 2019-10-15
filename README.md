@@ -41,13 +41,18 @@ apis:
   - parameters:
     - name (required) - import path of the proto
     - display (optional) - text to display on the link, if not specified, defaults to the name
+  - the following two examples produce the same href: `http://[domain]/[product and version scope]/api/github.com/solo-io/gloo/projects/gloo/api/v1/proxy.proto.sk/#consulservicedestination`
+    - link with the default text: "gloo.solo.io.ConsulServiceDestination"
 ```
-# example link with the default text: "gloo.solo.io.ConsulServiceDestination"
 {{< protobuf name="gloo.solo.io.ConsulServiceDestination" >}}
-# example link with custom display text "consul destination type"
-{{< protobuf name="gloo.solo.io.ConsulServiceDestination" display="consul destination type" >}}
-# both produce the following href:
-http://[domain]/[product and version scope]/api/github.com/solo-io/gloo/projects/gloo/api/v1/proxy.proto.sk/#consulservicedestination`
+```
+    - link with custom display text "consul destination type"
+```
+{{<
+protobuf
+name="gloo.solo.io.ConsulServiceDestination"
+display="consul destination type"
+>}}
 ```
 
 - `layouts/shortcodes/versioned_link_path.html`
