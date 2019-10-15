@@ -1,8 +1,8 @@
-{{ $protoName := .Get "name" }}
-{{ $displayName := .Get "display" }}
-{{ if eq $displayName "" }}
-{{ $displayName = $protoName }}
-{{ end }}
-{{ $protoDocsSummary := index .Site.Data.ProtoMap.apis $protoName }}
-{{ $protoDocsUrl := lower $protoDocsSummary.relativepath }}
+{{- $protoName := .Get "name" -}}
+{{- $displayName := .Get "display" -}}
+{{- if eq $displayName "" -}}
+{{- $displayName = $protoName -}}
+{{- end -}}
+{{- $protoDocsSummary := index .Site.Data.ProtoMap.apis $protoName -}}
+{{- $protoDocsUrl := lower $protoDocsSummary.relativepath -}}
 <a {{ printf "href=%v/%v" .Site.Data.Solo.DocsVersion $protoDocsUrl | safeHTMLAttr }}>{{ $displayName }}</a>
