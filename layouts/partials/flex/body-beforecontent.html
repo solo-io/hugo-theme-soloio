@@ -1,29 +1,30 @@
 <header>
+  <div class="contentWidth">
+    <div class="logo">
+      {{ partial "header.html" . }}
+    </div>
 
-  <div class="logo">
-    {{ partial "header.html" . }}
+
+
+    <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+      <nav class="shortcuts">
+          {{- partial "search.html" . }}
+          <div title="v{{.Site.Data.Solo.CodeVersion}}"
+              style="overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;"
+          >v{{ .Site.Data.Solo.CodeVersion }}</div>
+      {{- with .Site.Menus.shortcuts}}
+          {{- range sort . "Weight"}}
+              <li class="" role="">
+                  <a href="{{.URL}}" {{if eq $.Site.Params.menushortcutsnewtab true}}target="_blank"{{end}} rel="noopener">
+                    {{safeHTML .Name}}
+                  </a>
+              </li>
+          {{- end}}
+      </nav>
+    {{- end}}
   </div>
-
-
-
-  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
-    <nav class="shortcuts">
-        {{- partial "search.html" . }}
-        <div title="v{{.Site.Data.Solo.CodeVersion}}"
-             style="overflow: hidden;
-             text-overflow: ellipsis;
-             white-space: nowrap;"
-        >v{{ .Site.Data.Solo.CodeVersion }}</div>
-    {{- with .Site.Menus.shortcuts}}
-        {{- range sort . "Weight"}}
-            <li class="" role="">
-                <a href="{{.URL}}" {{if eq $.Site.Params.menushortcutsnewtab true}}target="_blank"{{end}} rel="noopener">
-                  {{safeHTML .Name}}
-                </a>
-            </li>
-        {{- end}}
-    </nav>
-  {{- end}}
 </header>
 <article>
   <aside>
