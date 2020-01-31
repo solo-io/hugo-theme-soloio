@@ -9,7 +9,7 @@
 <!-- Need to run throuugh a RANGE of .Site.Data.Solo.DocsVersions .  This is tough to test locally as the version folders aren't generated -->
 <label for="version-selection" id="version-selection-label">Version:</label>
 <select id="version-selection" onchange="javascript:location.href = this.value;">
-  <option value="/latest{{ .RelPermalink}}" {{if in .RelPermalink "latest/"}} selected{{end}}>
+  <option value="/gloo/latest{{ .RelPermalink}}" {{if in .RelPermalink "latest/"}} selected{{end}}>
     latest
   </option>
   <option value="/gloo/1.3.0{{ .RelPermalink}}" {{if in .RelPermalink "1.3.0/"}} selected{{end}}>
