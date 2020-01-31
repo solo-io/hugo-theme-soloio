@@ -1,5 +1,5 @@
-<!-- templates -->
-{{- define "version-nav" }}
+<label for="version-selection" id="version-selection-label">Version:</label>
+<select id="version-selection" onchange="javascript:location.href = this.value;">
   <option value="/latest/{{ .RelPermalink}}" {{if in .RelPermalink "latest/"}} selected{{end}}>
     latest
   </option>
@@ -21,4 +21,4 @@
   <option value="/0.20.13/{{ .RelPermalink}}" {{if in .RelPermalink "0.20.13/"}} selected{{end}}>
     0.20.13
   </option>
-{{- end}}
+</select>
