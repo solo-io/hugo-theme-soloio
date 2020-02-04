@@ -1,3 +1,7 @@
+article section.page {
+  padding: 2rem 3.5rem;
+}
+
 article > aside {
   padding-right: 0.5rem;
   width: 21rem;
