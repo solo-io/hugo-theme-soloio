@@ -4,64 +4,53 @@
       {{ partial "header.html" . }}
     </div>
 
-    <div class="burger">
-      <a href="javascript:void(0);" style="font-size:15px;">&#9776;</a>
-    </div>
-    <nav class="shortcuts">
-      {{- partial "search.html" . }} {{ partial "versionnavigation.html" . }}
-      {{- with .Site.Menus.shortcuts}} {{- range sort . "Weight"}}
-      <li class="" role="">
-        <a
-          href="{{.URL}}"
-          {{if
-          eq
-          $.Site.Params.menushortcutsnewtab
-          true}}target="_blank"
-          {{end}}
-          rel="noopener"
-        >
-          {{safeHTML .Name}}
-        </a>
-      </li>
-      {{- end}}
-    </nav>
+
+
+    <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+      <nav class="shortcuts">
+        {{- partial "search.html" . }}
+        
+        {{ partial "versionnavigation.html" . }}
+
+        {{- with .Site.Menus.shortcuts}}
+          {{- range sort . "Weight"}}
+            <li class="" role="">
+              <a href="{{.URL}}" {{if eq $.Site.Params.menushortcutsnewtab true}}target="_blank"{{end}} rel="noopener">
+                {{safeHTML .Name}}
+              </a>
+            </li>
+          {{- end}}
+      </nav>
     {{- end}}
   </div>
 </header>
 <article>
   <aside>
     <ul class="menu">
-      <a
-        id="topic-logo"
-        href="{{ .Site.BaseURL }}{{ .Site.Data.Solo.DocsVersion }}"
-      >
-        <img
-          src="{{ .Site.Data.Solo.DocsVersion }}{{ .Site.Params.logoPath }}"
-        />
+      <a id="topic-logo" href="{{ .Site.BaseURL }}{{ .Site.Data.Solo.DocsVersion }}">
+          <img src="{{ .Site.Data.Solo.DocsVersion }}{{ .Site.Params.logoPath }}" >
       </a>
 
       <br />
 
       {{- partial "menu.html" . }}
     </ul>
-
+    
     {{- partial "language-selector.html" . }}
     <section>
       {{- partial "menu-footer.html" . }}
     </section>
   </aside>
   <section class="page">
-    <div class="nav-select">
-      <center>
-        Navigation :
-        <select onchange="javascript:location.href = this.value;">
-          {{partial "flex/selectnavigation.html" .}}
-        </select>
-      </center>
-    </div>
 
-    {{if not .IsHome}}
-    <h1>{{.Title}}</h1>
-    {{end}}
-  </section>
-</article>
+    
+  <div class="nav-select">
+    <center>Navigation : 
+      <select onchange="javascript:location.href = this.value;">
+        {{partial "flex/selectnavigation.html" .}}
+      </select>
+    </center>
+  </div>
+  
+
+  {{if not .IsHome}}<h1>{{.Title}}</h1>{{end}}
