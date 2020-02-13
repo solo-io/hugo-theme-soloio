@@ -31,19 +31,11 @@ article section {
 }
 
 article section.page {
-  padding: 3rem 25rem 3rem 7rem;
+  padding: 3rem 0rem 3rem 7rem;
 }
 
 img {
   max-height: 500px;
-}
-
-li {
-  margin-bottom: 1rem;
-}
-
-p {
-  line-height: 1rem;
 }
 
 section a {
@@ -84,10 +76,6 @@ article section.page h4,
 article section.page h5,
 article section.page strong {
   color: #35393b;
-}
-
-section p {
-  display: inline;
 }
 
 /** FLEEEEXXXX **/
