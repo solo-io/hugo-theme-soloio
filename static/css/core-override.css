@@ -78,10 +78,6 @@ article section.page strong {
   color: #35393b;
 }
 
-section p {
-  display: inline;
-}
-
 /** FLEEEEXXXX **/
 
 @media (max-width: 768px) {
