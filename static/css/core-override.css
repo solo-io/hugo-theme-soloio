@@ -7,6 +7,12 @@ header {
   display: block;
 }
 
+article > aside .menu .dd-item > ul {
+  border-left: 1px dashed #d4d8de;
+  border-bottom: 1px dashed #d4d8de;
+  padding-left: 15px;
+}
+
 .contentWidth {
   display: flex;
   flex-wrap: wrap;
@@ -104,10 +110,8 @@ section p {
     border-bottom: 1px dashed #d4d8de;
     padding-left: 15px;
     color: #6e7477;
-
   }
-  
- 
+
   header .searchbox {
     padding-left: 0;
     width: 40vw;
