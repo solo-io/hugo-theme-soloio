@@ -31,7 +31,7 @@ article section {
 }
 
 article section.page {
-  padding: 3rem 0rem 3rem 7rem;
+  padding: 3rem 7rem 3rem 7rem;
 }
 
 img {
@@ -48,7 +48,9 @@ section ul {
 }
 section ul > li {
   align-items: center;
+  margin-bottom: 1rem;
 }
+
 section ul > li:before {
   content: " ";
   background: #2196c9;
@@ -58,6 +60,10 @@ section ul > li:before {
   margin-right: 1rem;
   margin-top: -3px;
   display: inline-block;
+}
+
+section li p {
+  display: inline;
 }
 
 section ul ol,
