@@ -7,9 +7,10 @@ header {
   display: block;
 }
 
-article,
-.contentWidth {
-  max-width: 1250px;
+article > aside .menu .dd-item > ul {
+  border-left: 1px dashed #d4d8de;
+  border-bottom: 1px dashed #d4d8de;
+  padding-left: 15px;
 }
 
 .contentWidth {
@@ -21,18 +22,28 @@ article,
 
 article {
   width: 100vw;
-  margin: 3.5rem auto 0;
 }
 article > aside {
   left: auto;
 }
+article section {
+  padding: 2rem 3.5rem;
+}
+
 article section.page {
-  margin: 0 0 0 21rem;
-  padding: 2rem 0 2rem 3.5rem;
+  padding: 3rem 25rem 3rem 7rem;
 }
 
 img {
   max-height: 500px;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1rem;
 }
 
 section a {
@@ -90,8 +101,10 @@ section p {
     flex: none;
   }
   header nav.shortcuts {
-    flex: none
+    flex: none;
+    align-items: baseline;
   }
+
   header .searchbox {
     padding-left: 0;
     width: 40vw;
