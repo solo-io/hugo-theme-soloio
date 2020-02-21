@@ -20,7 +20,6 @@
     {{- $numberOfPages := (add (len .Pages) (len .Sections)) }}
     {{- safeHTML .Params.head}}
     <li data-nav-id="{{.URL}}" class="dd-item
-        {{- if .IsAncestor $currentNode}} parent{{end}}
         {{- if eq .URL $currentNode.URL}} active{{end}}
         {{- if .Params.alwaysopen}} alwaysopen{{end -}}
         {{- if ne $numberOfPages 0 }} haschildren{{end}}
@@ -29,7 +28,7 @@
         <a href="{{ .Site.Data.Solo.DocsVersion }}{{ .RelPermalink}}">{{safeHTML .Params.Pre}}{{or .Params.menuTitle .Title}}{{safeHTML .Params.Post}}</a>
 
         {{- if ne $numberOfPages 0 }}
-          {{- if or (.IsAncestor $currentNode) (.Params.alwaysopen) }}
+          {{- if .Params.alwaysopen }}
             <i class="fa fa-angle-down fa-lg category-icon"></i>
           {{- else -}}
             <i class="fa fa-angle-right fa-lg category-icon"></i>
