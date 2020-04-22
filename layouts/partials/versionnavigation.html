@@ -8,7 +8,7 @@
   
 <!-- Need to run throuugh a RANGE of .Site.Data.Solo.DocsVersions .  This is tough to test locally as the version folders aren't generated -->
 <label for="version-selection" id="version-selection-label">Version:</label>
-<select id="version-selection" onchange="javascript:location.href = this.value;">
+<select id="version-selection" onchange="javascript:location.href = this.value; localStorage.setItem('version',this.value)">
   <option value="/gloo/latest{{ .RelPermalink}}" {{if in .Site.Data.Solo.DocsVersion "latest"}} selected{{end}}>
     latest
   </option>
