@@ -34,5 +34,19 @@
     {{ partial "custom-footer.html" . }}
   </body>
 </html>
+<script type="text/javascript">
+	// If we're on /gloo/latest/404.html and the version navbar was not set to 'latest',
+	// redirect from /gloo/latest/404.html to the correctly versioned 404.html page.
+	if (document.referrer === "") {
+		if (location.href.indexOf("latest/404.html") !== -1) {
+			if (location.href.indexOf(localStorage.getItem('version').substr(0,12)) === -1) {
+				let url = localStorage.getItem('version').split("/");
+				location.href="/"+url[1]+"/"+url[2]+"/404.html";
+			}
+		}
+	} else {
+		localStorage.setItem('version', "/gloo/latest/404.html");
+	}
+</script>
 
 
