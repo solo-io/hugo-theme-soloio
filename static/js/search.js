@@ -1,4 +1,5 @@
 var lunrIndex, pagesIndex;
+var MAX_RESULTS = 20;
 
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -10,34 +11,30 @@ function initLunr() {
         baseurl = baseurl+'/'
     };
 
-    // First retrieve the index file
-    $.getJSON(baseurl +"index.json")
-        .done(function(index) {
-            pagesIndex =   index;
-            // Set up lunrjs by declaring the fields we use
-            // Also provide their boost level for the ranking
-            lunrIndex = new lunr.Index
-            lunrIndex.ref("uri");
-            lunrIndex.field('title', {
-                boost: 15
-            });
-            lunrIndex.field('tags', {
-                boost: 10
-            });
-            lunrIndex.field("content", {
-                boost: 5
-            });
+    // Retrieve the pre-compiled lunrJS index.
+    $.getJSON(baseurl +"search-index.json")
+    .done(function(data) {
+        lunrIndex = lunr.Index.load(data)
+    })
+    .fail(function(jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error;
+        console.error("Error getting search index file:", err);
+    });
 
-            // Feed lunr with each file and let lunr actually index them
-            pagesIndex.forEach(function(page) {
-                lunrIndex.add(page);
-            });
-            lunrIndex.pipeline.remove(lunrIndex.stemmer)
+    // Still need the hugo index because lunr only retuns refs
+    $.getJSON(baseurl +"index.json")
+    .done(function(hugoIndex) {
+        pagesIndex = {};
+        // Build a map, for quicker searching than array
+        hugoIndex.forEach(function(page) {
+            pagesIndex[page.uri] = page;
         })
-        .fail(function(jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error;
-            console.error("Error getting Hugo index file:", err);
-        });
+    })
+    .fail(function(jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error;
+        console.error("Error getting Hugo index file:", err);
+    });
+
 }
 
 /**
@@ -47,12 +44,15 @@ function initLunr() {
  * @return {Array}  results
  */
 function search(query) {
-    // Find the item in our index corresponding to the lunr one to have more info
-    return lunrIndex.search(query).map(function(result) {
-            return pagesIndex.filter(function(page) {
-                return page.uri === result.ref;
-            })[0];
-        });
+    // Perform Lunr search
+    var searchResults = lunrIndex.search(query)
+    // Only take the first 20 as we don't want to fill the dom on generic requests
+    // like "Gloo" or "Kubernetes". They are already sorted by relevance.
+    var numResults = searchResults.length > MAX_RESULTS ? MAX_RESULTS : searchResults.length;
+    return searchResults.slice(0,numResults).map(function(result) {
+        // Return the full item from the hugo index.
+        return pagesIndex[result.ref];
+    });
 }
 
 // Let's get started
@@ -84,7 +84,6 @@ $( document ).ready(function() {
         },
         /* onSelect callback fires when a search suggestion is chosen */
         onSelect: function(e, term, item) {
-            console.log(item.getAttribute('data-val'));
             location.href = item.getAttribute('data-uri');
         }
     });
