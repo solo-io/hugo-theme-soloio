@@ -18,7 +18,7 @@ function initLunr() {
     })
     .fail(function(jqxhr, textStatus, error) {
         var err = textStatus + ", " + error;
-        console.error("Error getting Hugo index file:", err);
+        console.error("Error getting search index file:", err);
     });
 
     // Still need the hugo index because lunr only retuns refs
@@ -29,6 +29,10 @@ function initLunr() {
         hugoIndex.forEach(function(page) {
             pagesIndex[page.uri] = page;
         })
+    })
+    .fail(function(jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error;
+        console.error("Error getting Hugo index file:", err);
     });
 
 }
