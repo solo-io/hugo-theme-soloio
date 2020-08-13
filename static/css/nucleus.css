@@ -31,9 +31,11 @@ header,
 hgroup,
 main,
 nav,
-section,
-summary {
+section {
   display: block; }
+
+summary {
+  display: list-item; }
 
 audio,
 canvas,
