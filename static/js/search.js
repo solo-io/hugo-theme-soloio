@@ -68,10 +68,12 @@ $( document ).ready(function() {
         /* renderItem displays individual search results */
         renderItem: function(item, term) {
             var numContextWords = 2;
-            var text = item.content.match(
-                "(?:\\s?(?:[\\w]+)\\s?){0,"+numContextWords+"}" +
-                    term+"(?:\\s?(?:[\\w]+)\\s?){0,"+numContextWords+"}");
-            item.context = text;
+            // get search term context for autocomplete suggestion item
+            var index = item.content.indexOf(term)
+            if (index != -1){
+                var arr = item.content.substring(index - 25, index + 25).trim().split(" ").slice(1,-1).join(" ")
+                item.context = arr
+            }
             return '<div class="autocomplete-suggestion" ' +
                 'data-term="' + term + '" ' +
                 'data-title="' + item.title + '" ' +
