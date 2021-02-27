@@ -5,7 +5,7 @@
 	"uri": "{{ .Site.Data.Solo.DocsVersion }}{{ $page.RelPermalink }}",
 	"title": "{{ htmlEscape $page.Title}}",
 	"tags": [{{ range $tindex, $tag := $page.Params.tags }}{{ if $tindex }}, {{ end }}"{{ $tag| htmlEscape }}"{{ end }}],
-	"description": "{{ htmlEscape .Description}}",
+	"description": {{ htmlEscape .Description | jsonify}},
 	"content": {{$page.Plain | jsonify}}
 }
 {{- end -}}
