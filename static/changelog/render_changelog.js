@@ -180,7 +180,7 @@ function Note(note){
 }
 
 function getGithubReleaseLink(versionString, useOtherRepo){
-  let repo = useOtherRepo ? globalOpts.OtherRepo : globalOpts.Repo
+  let repo = useOtherRepo ? globalOpts.DependentRepo : globalOpts.MainRepo
   return `[${versionString}](https://github.com/${globalOpts.RepoOwner}/${repo}/releases/tag/${versionString})`;
 }
 
@@ -281,7 +281,7 @@ class MinorReleaseRenderer extends MarkdownRenderer{
   renderVersionData(input, showOSNotes){
     var output = "";
     for (const [header, notes] of Object.entries(input.changelogNotes)){
-
+      console.log("HI", getGithubReleaseLink(header))
       output += H3(getGithubReleaseLink(header) + notes.headerSuffix);
       output += this.renderChangelogNotes(notes, showOSNotes);
     }
@@ -436,7 +436,7 @@ class VersionComparer{
       for (let [version, notes] of Object.entries(versionData)){
         notes = notes.filter(note => !note.FromDependentVersion || showOpenSource)
         if (notes.length > 0){
-          noteStr += H4("Added in " + getGithubReleaseLink(version));
+          noteStr += H4("Added in " + getGithubReleaseLink(version, true));
           for (const note of notes){
             noteStr += UnorderedListItem(Note(note));
             count += 1
