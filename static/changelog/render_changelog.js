@@ -254,6 +254,7 @@ class MarkdownRenderer{
       simplifiedAutoLink: true,
     });
     const markdown = this.render(this.releaseData, showOSNotes);
+    console.log(markdown)
     return renderer.makeHtml(markdown);
   }
 }
@@ -281,7 +282,6 @@ class MinorReleaseRenderer extends MarkdownRenderer{
   renderVersionData(input, showOSNotes){
     var output = "";
     for (const [header, notes] of Object.entries(input.changelogNotes)){
-      console.log("HI", getGithubReleaseLink(header))
       output += H3(getGithubReleaseLink(header) + notes.headerSuffix);
       output += this.renderChangelogNotes(notes, showOSNotes);
     }
@@ -391,7 +391,6 @@ class VersionComparer{
 
   markdownToHtml(markdown){
     const renderer = new showdown.Converter({
-      extensions: ['auto-url'],
       headerLevelStart: 3,
       prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
     });
@@ -447,6 +446,7 @@ class VersionComparer{
       
     }
     const divText = this.markdownToHtml(output);
+    console.log(output)
     $("#compareversionstextdiv").html(divText)
     return divText;
   }
