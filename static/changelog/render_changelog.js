@@ -1,114 +1,90 @@
-const MINOR_RELEASE = "minorrelease"
-const CHRONOLOGICAL = "chronological"
-const COMPARE_VERSIONS = "compareversions"
+const MINOR_RELEASE = 'minorrelease';
+const CHRONOLOGICAL = 'chronological';
+const COMPARE_VERSIONS = 'compareversions';
 
-const HASH_SEPARATOR = "_"
-function copyAnchorToClipboard(elem){
-  str = window.location.href.split('#')[0] + '#' +elem.id
-  const el = document.createElement('textarea');
-  el.value = str;
-  el.setAttribute('readonly', '');
-  el.style.position = 'absolute';
-  el.style.left = '-9999px';
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-}
-// Extension for adding header anchor links
+/*
+ ShowdownJS extensions
+ We use ShowdownJS to render Markdown to HTML, these extensions add regular functionality back to the rendered markdown
+*/
+// Extension for adding header anchor links to markdown
 showdown.extension('header-anchors', function() {
-  var ancTpl = '$1<a id="user-content-$3" onclick="copyAnchorToClipboard($3)" class="anchor" href="#$3" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>$4';
+  const ancTpl = '$1<a id="user-content-$3" onclick="copyAnchorToClipboard($3)" class="anchor" href="#$3" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>$4';
   return [{
     type: 'html',
     regex: /(<h([1-5]) id="([^"]+?)">.*)(<\/h\2>)/g,
-    replace: ancTpl
+    replace: ancTpl,
   }];
 });
 
+// Extension for rendering url-s automatically
 showdown.extension('auto-url', function() {
-  var ancTpl = '$1<a id="user-content-$3" onclick="copyAnchorToClipboard($3)" class="anchor" href="#$3" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>$4';
   return [{
     type: 'lang',
     regex: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g,
-    replace: '[$1]($1)'
+    replace: '[$1]($1)',
   }];
 });
 
-const changelogTypeSelect = $("#select-type");
+const SELECT_BOX_ID = '#solodocs-select-type';
 
-const getLastItem = path => {
-  const cleanPath = path.replace(/\/$/, '');
-  return cleanPath.substring(cleanPath.lastIndexOf('/') + 1);
-}
-
-function evaluateHash() {
-  const page = getLastItem(window.location.pathname);
-  const hash = window.location.hash.substr(1);
-  let changelogType = MINOR_RELEASE;
-  if (hash.split(HASH_SEPARATOR).length > 0){
-    switch (hash.split(HASH_SEPARATOR)[0]){
-      case CHRONOLOGICAL:
-      case MINOR_RELEASE:
-      case COMPARE_VERSIONS:
-        changelogType = hash.split(HASH_SEPARATOR)[0];
-        break
-      }
-  }
-  changelogTypeSelect.val(changelogType);
-  generateChangelog(changelogType);
-}
-evaluateHash();
-window.onhashchange = evaluateHash
-
-document.querySelector("#select-type").addEventListener("change", e => {
-  window.location.hash = e.target.value;
-});
-
-var changelogJsonData = null
-
-let changelogData = {data: undefined};
+const changelogData = {data: undefined};
 const changelogDataSetter = new Proxy(changelogData, {
-  set: function(_, key, value){
-    if (key === "data"){
-      $("#changelogdiv").html(value);
-      if (document.querySelector(window.location.hash)){
-        document.querySelector(window.location.hash).scrollIntoView();
-      }
+  set: function(_, key, value) {
+    if (key === 'data') {
+      $('#solodocs-changelogdiv').html(value);
     }
     return true;
-  }
+  },
 });
 
-let showOpenSource = true
-$('#showOpenSource').click(function() {
-  showOpenSource = this.checked
-  evaluateHash();
-})
-
-function getText(){
-  if (!changelogPath){
-    console.err("changelogPath must be defined")
+const HASH_SEPARATOR = '_';
+function evaluateHash() {
+  const hash = window.location.hash.substr(1);
+  let changelogType = MINOR_RELEASE;
+  let scrollIntoView = true;
+  if (hash.split(HASH_SEPARATOR).length > 0) {
+    switch (hash.split(HASH_SEPARATOR)[0]) {
+      case COMPARE_VERSIONS:
+        scrollIntoView = false;
+      case CHRONOLOGICAL:
+      case MINOR_RELEASE:
+        changelogType = hash.split(HASH_SEPARATOR)[0];
+        break;
+    }
   }
-  return fetch(changelogPath)
-  .then(response => response.json()).then(resJson => resJson);
-}   
-
-let globalOpts = {};
-
-function generateChangelog(type){
-  if (!changelogJsonData){
-    getText().then(json => {
-      changelogJsonData = json;
-      globalOpts = changelogJsonData.Opts
-      changelogDataSetter.data = generateMarkdown(type, changelogJsonData, showOpenSource);
-    });
-  }else{
-    changelogDataSetter.data = generateMarkdown(type, changelogJsonData, showOpenSource);
+  $(SELECT_BOX_ID).val(changelogType);
+  changelogDataSetter.data = generateMarkdown(changelogType, changelogJsonData, showOpenSource);
+  if (scrollIntoView && window.location.hash && document.querySelector(window.location.hash)) {
+    document.querySelector(window.location.hash).scrollIntoView();
   }
 }
 
-function getRenderer(type, data){
-  switch(type){
+let showOpenSource = true;
+$('#solodocs-showOpenSource').click(function() {
+  showOpenSource = this.checked;
+  evaluateHash();
+});
+
+let changelogJsonData;
+
+$(document).ready(() => {
+  if (!changelogPath) {
+    console.err('changelogPath must be defined');
+  }
+  fetch(changelogPath).then((response) => response.json()).then((json) => {
+    changelogJsonData = json;
+    evaluateHash();
+    window.onhashchange = evaluateHash;
+
+    document.querySelector(SELECT_BOX_ID).addEventListener('change', (e) => {
+      window.location.hash = e.target.value;
+    });
+  });
+});
+
+
+function getRenderer(type, data) {
+  switch (type) {
     case CHRONOLOGICAL:
       return new ChronologicalRenderer(data);
     case MINOR_RELEASE:
@@ -118,110 +94,48 @@ function getRenderer(type, data){
   }
 }
 
-function generateMarkdown(type, input, showOSNotes){
+function generateMarkdown(type, input, showOSNotes) {
   return getRenderer(type, input).renderMarkdown(showOSNotes);
 }
 
-function H1 (s){
-	return `\n# ${s}\n`
-}
-
-function H2 (s ) {
-	return `\n## ${s}\n`
-}
-
-function H3 (s ) {
-	return `\n### ${s}\n`
-}
-
-function H4 (s ) {
-	return `\n#### ${s}\n`
-}
-
-function H5 (s ) {
-	return `\n##### ${s}\n`
-}
-
-function H5 (s ) {
-	return `\n###### ${s}\n`
-}
-
-function Bold (s ) {
-	return `**${s}**`
-}
-
-function Italic (s ) {
-	return `*${s}*`
-}
-
-function OrderedListItem (s )  {
-	return `1. ${s}\n`
-}
-
-function UnorderedListItem (s)  {
-	return `- ${s}\n`
-}
-
-function Link(title, link )  {
-	return `[${title}](${link})`
-}
-
-function Collapsible(title, content, open=false){
-  return `\n<details ${open && 'open'}><summary >\n${title}</summary>\n${content}</details>\n `
-}
-
-function Note(note){
-  let out = "";
-  if (note.FromDependentVersion){
-    out += `(From OSS ${getGithubReleaseLink(note.FromDependentVersion, true)}) `
-  }
-  out += `${note.Note}`
-  return out
-}
-
-function getGithubReleaseLink(versionString, useOtherRepo){
-  let repo = useOtherRepo ? globalOpts.DependentRepo : globalOpts.MainRepo
-  return `[${versionString}](https://github.com/${globalOpts.RepoOwner}/${repo}/releases/tag/${versionString})`;
-}
-
-class ReleaseData{
-  constructor(input){
-    if (!input instanceof Array){
+class ReleaseData {
+  constructor(input) {
+    if (!input instanceof Array) {
       throw new Error(`Expecting array to ReleaseData ctor input`);
     }
     this.versionData = new Map();
-    for (let obj of input){
-      this.versionData[Object.keys(obj)[0]] = new VersionData(Object.values(obj)[0])
+    for (const obj of input) {
+      this.versionData[Object.keys(obj)[0]] = new VersionData(Object.values(obj)[0]);
     }
   }
 }
 
-class VersionData{
-  constructor(input){
-    if (!input instanceof Array){
-      throw new Error("Expecting array to VersionData ctor input");
+class VersionData {
+  constructor(input) {
+    if (!input instanceof Array) {
+      throw new Error('Expecting array to VersionData ctor input');
     }
     // Map gaurantees order of insertion
     this.changelogNotes = new Map();
-    for (let obj of input){
-      this.changelogNotes[Object.keys(obj)[0]] = new ChangelogNotes(Object.values(obj)[0])
+    for (const obj of input) {
+      this.changelogNotes[Object.keys(obj)[0]] = new ChangelogNotes(Object.values(obj)[0]);
     }
   }
 }
 
-class ChangelogNotes{
-  constructor(input){
-    this.categories = input.Categories || {}
-    this.extraNotes = input.ExtraNotes
-    this.headerSuffix = input.HeaderSuffix
-    this.createdAt = input.CreatedAt
+class ChangelogNotes {
+  constructor(input) {
+    this.categories = input.Categories || {};
+    this.extraNotes = input.ExtraNotes;
+    this.headerSuffix = input.HeaderSuffix;
+    this.createdAt = input.CreatedAt;
   }
 
-  add(otherChangelogNotes){
-    for (const [header, notes] of Object.entries(otherChangelogNotes.categories)){
-      for (const note of notes){
-        if (!this.categories[header]){
-          this.categories[header] = []
+  add(otherChangelogNotes) {
+    for (const [header, notes] of Object.entries(otherChangelogNotes.categories)) {
+      for (const note of notes) {
+        if (!this.categories[header]) {
+          this.categories[header] = [];
         }
         this.categories[header].push(note);
       }
@@ -229,24 +143,24 @@ class ChangelogNotes{
   }
 }
 
-class MarkdownRenderer{
-  constructor(changelogJSON){
-    this.options = changelogJSON["Opts"];
-    this.releaseData = new ReleaseData(changelogJSON["ReleaseData"]);
+class MarkdownRenderer {
+  constructor(changelogJSON) {
+    this.options = changelogJSON['Opts'];
+    this.releaseData = new ReleaseData(changelogJSON['ReleaseData']);
   }
-  render(obj, showOSNotes){
-    if (obj instanceof ChangelogNotes){
+  render(obj, showOSNotes) {
+    if (obj instanceof ChangelogNotes) {
       return this.renderChangelogNotes(obj, showOSNotes);
     }
-    if (obj instanceof VersionData){
+    if (obj instanceof VersionData) {
       return this.renderVersionData(obj, showOSNotes);
     }
-    if (obj instanceof ReleaseData){
+    if (obj instanceof ReleaseData) {
       return this.renderReleaseData(obj, showOSNotes);
     }
   }
 
-  renderMarkdown(showOSNotes){
+  renderMarkdown(showOSNotes) {
     const renderer = new showdown.Converter({
       extensions: this.discludeHeaderAnchors ? []: ['header-anchors'],
       headerLevelStart: 3,
@@ -254,142 +168,134 @@ class MarkdownRenderer{
       simplifiedAutoLink: true,
     });
     const markdown = this.render(this.releaseData, showOSNotes);
-    console.log(markdown)
     return renderer.makeHtml(markdown);
   }
 }
 
-class MinorReleaseRenderer extends MarkdownRenderer{
-  constructor(data){
-    super(data)
-    this.headerIdPrefix = MINOR_RELEASE
+class MinorReleaseRenderer extends MarkdownRenderer {
+  constructor(data) {
+    super(data);
+    this.headerIdPrefix = MINOR_RELEASE;
   }
 
-  renderChangelogNotes(input, showOSNotes){
-    var output = "";
-    for (let [header,notes] of Object.entries(input.categories)){
-      notes = notes.filter(note => !note.FromDependentVersion || showOSNotes)
-        if (notes.length > 0){
+  renderChangelogNotes(input, showOSNotes) {
+    let output = '';
+    for (let [header, notes] of Object.entries(input.categories)) {
+      notes = notes.filter((note) => !note.FromDependentVersion || showOSNotes);
+      if (notes.length > 0) {
         output += H4(header);
-        for (const note of notes){
-            output += UnorderedListItem(Note(note));
+        for (const note of notes) {
+          output += UnorderedListItem(Note(note));
         }
       }
     }
-    return output
+    return output;
   }
 
-  renderVersionData(input, showOSNotes){
-    var output = "";
-    for (const [header, notes] of Object.entries(input.changelogNotes)){
+  renderVersionData(input, showOSNotes) {
+    let output = '';
+    for (const [header, notes] of Object.entries(input.changelogNotes)) {
       output += H3(getGithubReleaseLink(header) + notes.headerSuffix);
       output += this.renderChangelogNotes(notes, showOSNotes);
     }
-    return output
+    return output;
   }
 
-  renderReleaseData(input, showOSNotes){
-    var output = "";
-    for (const [header, notes] of Object.entries(input.versionData)){
-      output += Collapsible(header, this.renderVersionData(notes, showOSNotes), open=true)
+  renderReleaseData(input, showOSNotes) {
+    let output = '';
+    for (const [header, notes] of Object.entries(input.versionData)) {
+      output += Collapsible(header, this.renderVersionData(notes, showOSNotes), open=true);
     }
-    return output
+    return output;
   }
 }
 
 
-class ChronologicalRenderer extends MarkdownRenderer{
-  constructor(data){
+class ChronologicalRenderer extends MarkdownRenderer {
+  constructor(data) {
     super(data);
     this.headerIdPrefix = CHRONOLOGICAL;
   }
-  renderChangelogNotes(input, showOSNotes){
-    input.sort((a, b) => {return b[1].createdAt - a[1].createdAt});
-    let output = ""
-    for (const [header, changelogNotes] of input){
-      output += H3(getGithubReleaseLink(header) + changelogNotes.headerSuffix)
-      for (let [category,notes] of Object.entries(changelogNotes.categories)){
-        notes = notes.filter(note => !note.FromDependentVersion || showOSNotes)
-          if (notes.length > 0){
+  renderChangelogNotes(input, showOSNotes) {
+    input.sort((a, b) => {
+      return b[1].createdAt - a[1].createdAt;
+    });
+    let output = '';
+    for (const [header, changelogNotes] of input) {
+      output += H3(getGithubReleaseLink(header) + changelogNotes.headerSuffix);
+      for (let [category, notes] of Object.entries(changelogNotes.categories)) {
+        notes = notes.filter((note) => !note.FromDependentVersion || showOSNotes);
+        if (notes.length > 0) {
           output += H4(category);
-          for (const note of notes){
+          for (const note of notes) {
             output += UnorderedListItem(Note(note));
           }
         }
       }
     }
-    return output
+    return output;
   }
 
-  renderVersionData(input, showOSNotes){
-    var notes = []
-    for (const versionData of input){
-      for (const [version, data] of Object.entries(versionData.changelogNotes)){
-        notes.push([version, data])
+  renderVersionData(input, showOSNotes) {
+    const notes = [];
+    for (const versionData of input) {
+      for (const [version, data] of Object.entries(versionData.changelogNotes)) {
+        notes.push([version, data]);
       }
     }
-    let output = this.renderChangelogNotes(notes, showOSNotes)
-    return output
+    const output = this.renderChangelogNotes(notes, showOSNotes);
+    return output;
   }
 
-  renderReleaseData(input, showOSNotes){
-    var notes = []
-    for (const [_, version] of Object.entries(input.versionData)){
-      notes.push(version)
+  renderReleaseData(input, showOSNotes) {
+    const notes = [];
+    for (const [, version] of Object.entries(input.versionData)) {
+      notes.push(version);
     }
-    let output = this.renderVersionData(notes, showOSNotes);
-    return output
+    const output = this.renderVersionData(notes, showOSNotes);
+    return output;
   }
 }
 
-
-let previousVersion_compare = new Proxy({}, {
-  set: function(obj, key, value){
-
-    return true;
-  }
-});
-let laterVersion_compare;
-
-class VersionComparer{
-  constructor(data){
-    this.opts = data["Opts"];
-    this.releaseData = new ReleaseData(data["ReleaseData"]);
-    this.headerIdPrefix = COMPARE_VERSIONS
-    this.discludeHeaders = ["Dependency Bumps", "Pre-release"]
+class VersionComparer {
+  constructor(data) {
+    this.opts = data['Opts'];
+    this.releaseData = new ReleaseData(data['ReleaseData']);
+    this.headerIdPrefix = COMPARE_VERSIONS;
+    this.discludeHeaders = ['Dependency Bumps', 'Pre-release'];
   }
 
-  renderVersionData(input, showOSNotes){
-    var notes = []
-    for (const versionData of input){
-      for (const [version, data] of Object.entries(versionData.changelogNotes)){
-        notes.push([version, data])
+  renderVersionData(input, showOSNotes) {
+    const notes = [];
+    for (const versionData of input) {
+      for (const [version, data] of Object.entries(versionData.changelogNotes)) {
+        notes.push([version, data]);
       }
     }
-    let output = this.renderChangelogNotes(notes, showOSNotes)
-    return output
+    const output = this.renderChangelogNotes(notes, showOSNotes);
+    return output;
   }
 
-  renderChangelogNotes(input, showOSNotes){
-    var output = "";
-    let sortedByCategory = Object.entries(input.categories).sort((a , b) => a[0] > b[0])
-    for (let [header,notes] of sortedByCategory){
-      if (this.discludeHeaders.includes(header)){
+  renderChangelogNotes(input, showOSNotes) {
+    let output = '';
+    const sortedByCategory = Object.entries(input.categories).sort((a, b) => a[0] > b[0]);
+    for (let [header, notes] of sortedByCategory) {
+      if (this.discludeHeaders.includes(header)) {
         continue;
       }
-      let section = ""
-      notes = notes.filter(note => !note.FromDependentVersion || showOSNotes)
-      if (notes.length > 0){
-        for (const note of notes){
+      let section = '';
+      notes = notes.filter((note) => !note.FromDependentVersion || showOSNotes);
+      if (notes.length > 0) {
+        for (const note of notes) {
           section += UnorderedListItem(Note(note));
         }
-        output += Collapsible(`${header} (${notes.length})`, section)
+        output += Collapsible(`${header} (${notes.length})`, section);
       }
-  }
-    return output
+    }
+    return output;
   }
 
-  markdownToHtml(markdown){
+  markdownToHtml(markdown) {
     const renderer = new showdown.Converter({
       headerLevelStart: 3,
       prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
@@ -397,64 +303,90 @@ class VersionComparer{
     return renderer.makeHtml(markdown);
   }
 
-  onSelectChange(){
-    let index = this.select.prop('selectedIndex');
-    let index1 = this.select1.prop('selectedIndex');
-    let select1Val = this.select1.val();
-    this.select1.empty();
-    this.select1.append($("<option>").attr('value', 'previousOnly').text("Left version Only"));
-    Object.entries(this.versions).slice(0,index).forEach(([k,v]) => this.select1.append($("<option>").attr('value', k).text(k)));
-    if (index < index1) {
-      index1 = 0;
-      this.select1.val('previousOnly')
-    }else{
-      this.select1.val(select1Val);
-    }
-    this.select1.prop("disabled", index === 0);
-    const startingIndex = index1 === 0 ? index : index1
-    let data = new Map()
-    for (const [version, changelogNotes] of Object.entries(this.versions).slice(startingIndex, index+1)){
-      for (const [header, notes] of Object.entries(changelogNotes.categories).sort((a, b) => a[0] > b[0])){
-        if (!this.discludeHeaders.includes(header)){
-          for (const note of notes){
-            if (!data[header]){
-              data[header] = {}
+  calculateDiff(startingIndex, endingIndex) {
+    const data = new Map();
+    for (const [version, changelogNotes] of Object.entries(this.versions).slice(startingIndex, endingIndex)) {
+      for (const [header, notes] of Object.entries(changelogNotes.categories).sort((a, b) => a[0] > b[0])) {
+        if (!this.discludeHeaders.includes(header)) {
+          for (const note of notes) {
+            if (!data[header]) {
+              data[header] = {};
             }
-            if (!data[header][version]){
-              data[header][version] = []
+            if (!data[header][version]) {
+              data[header][version] = [];
             }
             data[header][version].push(note);
           }
         }
       }
     }
-    let output = "";
-    for (const [header, versionData] of Object.entries(data)){
-      let noteStr = "";
-      let count = 0
-      for (let [version, notes] of Object.entries(versionData)){
-        notes = notes.filter(note => !note.FromDependentVersion || showOpenSource)
-        if (notes.length > 0){
-          noteStr += H4("Added in " + getGithubReleaseLink(version, true));
-          for (const note of notes){
+    return data;
+  }
+
+  renderOutput(data) {
+    let output = '';
+    for (const [header, versionData] of Object.entries(data)) {
+      let noteStr = '';
+      let count = 0;
+      for (let [version, notes] of Object.entries(versionData)) {
+        notes = notes.filter((note) => !note.FromDependentVersion || showOpenSource);
+        if (notes.length > 0) {
+          noteStr += H4('Added in ' + getGithubReleaseLink(version, true));
+          for (const note of notes) {
             noteStr += UnorderedListItem(Note(note));
-            count += 1
+            count += 1;
           }
         }
       }
-      output += Collapsible(`${header} (${count})`, noteStr)
-      
+      output += Collapsible(`${header} (${count})`, noteStr);
     }
+    return output;
+  }
+
+  setHash(previousVersion, newVersion) {
+    window.location.hash = `${COMPARE_VERSIONS}_${previousVersion}${newVersion ? `...${newVersion}` : ''}`;
+  }
+
+  onSelectChange() {
+    const oldVersionIdx = this.oldVersionSelect.prop('selectedIndex');
+    let newVersionIdx = this.newVersionSelect.prop('selectedIndex');
+
+    const newVersion = this.newVersionSelect.val();
+    this.newVersionSelect.empty();
+    this.newVersionSelect.append($('<option>').attr('value', 'previousOnly').text('Left version Only'));
+    Object.entries(this.versions).slice(0, oldVersionIdx).forEach(([k, v]) => this.newVersionSelect.append($('<option>').attr('value', k).text(k)));
+    if (oldVersionIdx < newVersionIdx) {
+      newVersionIdx = 0;
+      this.newVersionSelect.val('previousOnly');
+    } else {
+      this.newVersionSelect.val(newVersion);
+    }
+    if (this.newVersionSelect.val() === 'previousOnly') {
+      this.setHash(this.oldVersionSelect.val());
+    } else {
+      this.setHash(this.oldVersionSelect.val(), newVersion);
+    }
+    this.newVersionSelect.prop('disabled', oldVersionIdx === 0);
+    const startingIndex = newVersionIdx === 0 ? oldVersionIdx : newVersionIdx - 1;
+    const data = this.calculateDiff(startingIndex, oldVersionIdx + 1);
+    const output = this.renderOutput(data);
     const divText = this.markdownToHtml(output);
-    console.log(output)
-    $("#compareversionstextdiv").html(divText)
+    $('#solodocs-compareversionstextdiv').html(divText);
     return divText;
   }
 
-  renderMarkdown(showOSNotes){
+  getVersionsFromHash() {
+    const diffString = window.location.hash.split(HASH_SEPARATOR)[1];
+    if (diffString) {
+      return diffString.split('...');
+    }
+    return [];
+  }
+
+  renderMarkdown() {
     this.versions = new Map();
-    for (const [, v] of Object.entries(this.releaseData.versionData)){
-      for (const [version, data] of Object.entries(v.changelogNotes)){
+    for (const [, v] of Object.entries(this.releaseData.versionData)) {
+      for (const [version, data] of Object.entries(v.changelogNotes)) {
         // Don't include betas, only include releases
         // if (version.includes('-')){
         //   continue;
@@ -462,17 +394,28 @@ class VersionComparer{
         this.versions[version] = data;
       }
     }
-    var parentDiv = $('<div />')
-    var div = $('<div style="display:flex;width:20%;"/>')
-    this.select = $('<select style="margin-right: 30%"/>').change(this.onSelectChange.bind(this));
-    this.select1 = $('<select/>').prop('disabled', true).change(this.onSelectChange.bind(this));
-    this.select1.append($("<option>").attr('value', 'previousOnly').text("Left version Only"))
-    Object.entries(this.versions).forEach(([k]) => this.select.append($("<option>").attr('value', k).text(k)))
-    Object.entries(this.versions).forEach(([k]) => this.select1.append($("<option>").attr('value', k).text(k)))
-    div.append(this.select).append(this.select1)
-    var textDiv = $('<div id="compareversionstextdiv"/>').html(this.onSelectChange())
-    parentDiv.append(div).append(textDiv)
-    return parentDiv
-  }
+    const parentDiv = $('<div />');
+    const div = $('<div style="display:flex;width:20%;"/>');
+    this.oldVersionSelect = $('<select style="margin-right: 30%"/>').change(this.onSelectChange.bind(this));
+    this.newVersionSelect = $('<select/>').prop('disabled', true).change(this.onSelectChange.bind(this));
+    this.newVersionSelect.append($('<option>').attr('value', 'previousOnly').text('Left version Only'));
+    const versions = Object.entries(this.versions).map(([k]) => k);
+    versions.forEach((k) => {
+      this.oldVersionSelect.append($('<option>').attr('value', k).text(k));
+      this.newVersionSelect.append($('<option>').attr('value', k).text(k));
+    });
 
+    const [previousVersion, newVersion] = this.getVersionsFromHash();
+    if (previousVersion?.length > 0 && versions.includes(previousVersion)) {
+      this.oldVersionSelect.val(previousVersion);
+    }
+    if (newVersion?.length > 0 && versions.includes(newVersion)) {
+      this.newVersionSelect.val(newVersion);
+    }
+
+    div.append(this.oldVersionSelect).append(this.newVersionSelect);
+    const textDiv = $('<div id="compareversionstextdiv"/>').html(this.onSelectChange());
+    parentDiv.append(div).append(textDiv);
+    return parentDiv;
+  }
 }
