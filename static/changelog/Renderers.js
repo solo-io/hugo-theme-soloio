@@ -1,3 +1,161 @@
+class ReleaseData {
+  constructor(input) {
+    if (!input instanceof Array) {
+      throw new Error(`Expecting array to ReleaseData ctor input`);
+    }
+    this.versionData = new Map();
+    for (const obj of input) {
+      this.versionData[Object.keys(obj)[0]] = new VersionData(Object.values(obj)[0]);
+    }
+  }
+}
+
+class VersionData {
+  constructor(input) {
+    if (!input instanceof Array) {
+      throw new Error('Expecting array to VersionData ctor input');
+    }
+    // Map gaurantees order of insertion
+    this.changelogNotes = new Map();
+    for (const obj of input) {
+      this.changelogNotes[Object.keys(obj)[0]] = new ChangelogNotes(Object.values(obj)[0]);
+    }
+  }
+}
+
+class ChangelogNotes {
+  constructor(input) {
+    this.categories = input.Categories || {};
+    this.extraNotes = input.ExtraNotes;
+    this.headerSuffix = input.HeaderSuffix;
+    this.createdAt = input.CreatedAt;
+  }
+
+  add(otherChangelogNotes) {
+    for (const [header, notes] of Object.entries(otherChangelogNotes.categories)) {
+      for (const note of notes) {
+        if (!this.categories[header]) {
+          this.categories[header] = [];
+        }
+        this.categories[header].push(note);
+      }
+    }
+  }
+}
+
+class MarkdownRenderer {
+  constructor(changelogJSON) {
+    this.options = changelogJSON['Opts'];
+    this.releaseData = new ReleaseData(changelogJSON['ReleaseData']);
+  }
+  render(obj, showOSNotes) {
+    if (obj instanceof ChangelogNotes) {
+      return this.renderChangelogNotes(obj, showOSNotes);
+    }
+    if (obj instanceof VersionData) {
+      return this.renderVersionData(obj, showOSNotes);
+    }
+    if (obj instanceof ReleaseData) {
+      return this.renderReleaseData(obj, showOSNotes);
+    }
+  }
+
+  renderMarkdown(showOSNotes) {
+    const renderer = new showdown.Converter({
+      extensions: this.discludeHeaderAnchors ? []: ['header-anchors'],
+      headerLevelStart: 3,
+      prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
+      simplifiedAutoLink: true,
+    });
+    const markdown = this.render(this.releaseData, showOSNotes);
+    return renderer.makeHtml(markdown);
+  }
+}
+
+class ChronologicalRenderer extends MarkdownRenderer {
+  constructor(data) {
+    super(data);
+    this.headerIdPrefix = CHRONOLOGICAL;
+  }
+  renderChangelogNotes(input, showOSNotes) {
+    input.sort((a, b) => {
+      return b[1].createdAt - a[1].createdAt;
+    });
+    let output = '';
+    for (const [header, changelogNotes] of input) {
+      output += H3(getGithubReleaseLink(header) + changelogNotes.headerSuffix);
+      for (let [category, notes] of Object.entries(changelogNotes.categories)) {
+        notes = notes.filter((note) => !note.FromDependentVersion || showOSNotes);
+        if (notes.length > 0) {
+          output += H4(category);
+          for (const note of notes) {
+            output += UnorderedListItem(Note(note));
+          }
+        }
+      }
+    }
+    return output;
+  }
+
+  renderVersionData(input, showOSNotes) {
+    const notes = [];
+    for (const versionData of input) {
+      for (const [version, data] of Object.entries(versionData.changelogNotes)) {
+        notes.push([version, data]);
+      }
+    }
+    const output = this.renderChangelogNotes(notes, showOSNotes);
+    return output;
+  }
+
+  renderReleaseData(input, showOSNotes) {
+    const notes = [];
+    for (const [, version] of Object.entries(input.versionData)) {
+      notes.push(version);
+    }
+    const output = this.renderVersionData(notes, showOSNotes);
+    return output;
+  }
+}
+
+class MinorReleaseRenderer extends MarkdownRenderer {
+  constructor(data) {
+    super(data);
+    this.headerIdPrefix = MINOR_RELEASE;
+  }
+
+  renderChangelogNotes(input, showOSNotes) {
+    let output = '';
+    for (let [header, notes] of Object.entries(input.categories)) {
+      notes = notes.filter((note) => !note.FromDependentVersion || showOSNotes);
+      if (notes.length > 0) {
+        output += H4(header);
+        for (const note of notes) {
+          output += UnorderedListItem(Note(note));
+        }
+      }
+    }
+    return output;
+  }
+
+  renderVersionData(input, showOSNotes) {
+    let output = '';
+    for (const [header, notes] of Object.entries(input.changelogNotes)) {
+      output += H3(getGithubReleaseLink(header) + notes.headerSuffix);
+      output += this.renderChangelogNotes(notes, showOSNotes);
+    }
+    return output;
+  }
+
+  renderReleaseData(input, showOSNotes) {
+    let output = '';
+    for (const [header, notes] of Object.entries(input.versionData)) {
+      output += Collapsible(header, this.renderVersionData(notes, showOSNotes), open=true);
+    }
+    return output;
+  }
+}
+
 class VersionComparer {
   constructor(data) {
     this.opts = data['Opts'];
