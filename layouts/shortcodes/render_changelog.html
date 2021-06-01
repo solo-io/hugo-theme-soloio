@@ -15,9 +15,6 @@
 <div id="solodocs-changelogdiv"></div>
 <script>const changelogPath = '{{ (.Get "changelogJsonPath" )}}'</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw==" crossorigin="anonymous"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/MarkdownRenderer.js"|relURL}}"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/ChronologicalRenderer.js"|relURL}}"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/MinorReleaseRenderer.js"|relURL}}"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/VersionComparer.js"|relURL}}"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/changelog_utils.js"|relURL}}"></script>
-<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/render_changelog.js"|relURL}}"></script>
+<script src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/Renderers.js"|relURL}}"></script>
+<script src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/changelog_utils.js"|relURL}}"></script>
+<script src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/render_changelog.js"|relURL}}"></script>
