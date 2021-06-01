@@ -1,0 +1,23 @@
+<h3>Changelog</h3>
+<div style="display:flex;">
+<select name="type" id="solodocs-select-type">
+    <option value="minorrelease">By Release</option>
+    <option value="chronological">By Chronological Order</option>
+    <option value="compareversions">Compare Versions</option>
+</select>
+{{ if eq (.Get "enterprise") "true" }}
+<input type="checkbox" name="solodocs-showOpenSource" id="solodocs-showOpenSource" style="margin-top: 0.5%;margin-left: 5%;" checked>
+<label for="solodocs-showOpenSource">Show Open Source Notes</label>
+{{ end }}
+</div>
+
+
+<div id="solodocs-changelogdiv"></div>
+<script>const changelogPath = '{{ (.Get "changelogJsonPath" )}}'</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw==" crossorigin="anonymous"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/MarkdownRenderer.js"|relURL}}"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/ChronologicalRenderer.js"|relURL}}"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/MinorReleaseRenderer.js"|relURL}}"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/renderers/VersionComparer.js"|relURL}}"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/changelog_utils.js"|relURL}}"></script>
+<script async src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/render_changelog.js"|relURL}}"></script>
