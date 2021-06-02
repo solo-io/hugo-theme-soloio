@@ -13,7 +13,7 @@
 
 
 <div id="solodocs-changelogdiv"></div>
-{{ $changelogPath := printf "%s/%s" "/static/content" (.Get "changelogJsonPath") | relUrl}}
+{{ $changelogPath := printf "%s/%s" "/static/content" (.Get "changelogJsonPath")|relURL}}
 <script>const changelogPath = '{{.Site.Data.Solo.DocsVersion}}{{$changelogPath}}'</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw==" crossorigin="anonymous"></script>
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"/changelog/Renderers.js"|relURL}}"></script>
