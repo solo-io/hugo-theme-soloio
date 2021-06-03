@@ -81,6 +81,8 @@ function Link(title, link ) {
   return `[${title}](${link})`;
 }
 
+// Renderes a collapsible section, where content will only show if the title is expanded.
+// open determines whether or not the section is expanded by default
 function Collapsible(title, content, open=false) {
   return `\n<details ${open && 'open'}><summary >\n${title}</summary>\n${content}</details>\n `;
 }
