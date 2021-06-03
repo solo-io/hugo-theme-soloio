@@ -237,7 +237,7 @@ class VersionComparer {
           }
         }
       }
-      output += Collapsible(`${header} (${count})`, noteStr);
+      output += Collapsible(`${header} (${count})`, noteStr, true);
     }
     return output;
   }
