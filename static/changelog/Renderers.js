@@ -237,7 +237,7 @@ class VersionComparer {
           }
         }
       }
-      output += Collapsible(`${header} (${count})`, noteStr);
+      output += Collapsible(`${header} (${count})`, noteStr, true);
     }
     return output;
   }
@@ -305,10 +305,10 @@ class VersionComparer {
     });
 
     const [previousVersion, newVersion] = this.getVersionsFromHash();
-    if (previousVersion?.length > 0 && versions.includes(previousVersion)) {
+    if (previousVersion && previousVersion.length > 0 && versions.includes(previousVersion)) {
       this.oldVersionSelect.val(previousVersion);
     }
-    if (newVersion?.length > 0 && versions.includes(newVersion)) {
+    if (newVersion && newVersion.length > 0 && versions.includes(newVersion)) {
       this.newVersionSelect.val(newVersion);
     }
 
