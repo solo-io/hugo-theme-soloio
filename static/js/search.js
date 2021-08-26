@@ -51,7 +51,6 @@ function search(query) {
     var numResults = searchResults.length > MAX_RESULTS ? MAX_RESULTS : searchResults.length;
     return searchResults.slice(0,numResults).map(function(result) {
         // Return the full item from the hugo index.
-        console.log(pagesIndex[result.ref])
         return pagesIndex[result.ref];
     });
 }
