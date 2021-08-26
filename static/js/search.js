@@ -51,6 +51,7 @@ function search(query) {
     var numResults = searchResults.length > MAX_RESULTS ? MAX_RESULTS : searchResults.length;
     return searchResults.slice(0,numResults).map(function(result) {
         // Return the full item from the hugo index.
+        console.log(pagesIndex[result.ref])
         return pagesIndex[result.ref];
     });
 }
@@ -70,9 +71,13 @@ $( document ).ready(function() {
             var numContextWords = 2;
             // get search term context for autocomplete suggestion item
             var index = item.content.indexOf(term)
-            if (index != -1){
-                var arr = item.content.substring(index - 25, index + 25).trim().split(" ").slice(1,-1).join(" ")
+            if (index !== -1 && !item.context){
+                let arr = item.content.substring(index - 25, index + 25).trim().split(" ").slice(1,-1).join(" ")
                 item.context = arr
+            }
+            if (!item.title) {
+                const firstNewline = item.content.indexOf("\n")
+                item.title = item.content.substring(0,firstNewline).trim().split(" ").slice(0,4).join(" ")
             }
             return '<div class="autocomplete-suggestion" ' +
                 'data-term="' + term + '" ' +
