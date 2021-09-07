@@ -1,0 +1,3 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Makes the H3 font size smaller than H2. Uses small caps.

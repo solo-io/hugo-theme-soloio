@@ -84,6 +84,17 @@ article section.page strong {
   color: #35393b;
 }
 
+article section.page h2 {
+  margin-top: 3rem;
+}
+
+article section.page h3 {
+  font-size: 1.5rem;
+  font-variant-caps: small-caps;
+  margin-top: 1rem;
+  line-height: 1.2;
+}
+
 /** FLEEEEXXXX **/
 
 @media (max-width: 768px) {
