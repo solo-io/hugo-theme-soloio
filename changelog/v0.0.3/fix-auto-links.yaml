@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    issueLink: https://github.com/solo-io/hugo-theme-soloio/issues/37
+    description: Fix github auto links.

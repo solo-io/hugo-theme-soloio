@@ -61,11 +61,14 @@ class MarkdownRenderer {
   }
 
   renderMarkdown(showOSNotes) {
+    let extensions = ['auto-url'];
+    if (!this.discludeHeaderAnchors) {
+      extensions.push('header-anchors');
+    }
     const renderer = new showdown.Converter({
-      extensions: this.discludeHeaderAnchors ? []: ['header-anchors'],
+      extensions: extensions,
       headerLevelStart: 3,
       prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
-      simplifiedAutoLink: true,
     });
     const markdown = this.render(this.releaseData, showOSNotes);
     return renderer.makeHtml(markdown);
@@ -198,6 +201,7 @@ class VersionComparer {
     const renderer = new showdown.Converter({
       headerLevelStart: 3,
       prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
+      extensions: ['auto-url']
     });
     return renderer.makeHtml(markdown);
   }
