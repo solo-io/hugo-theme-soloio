@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    issueLink: https://github.com/solo-io/doctopus/issues/24
+    description: Add ability for doc sets to include a banner partial for a banner to show up on each page in the doc set.
