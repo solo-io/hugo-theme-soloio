@@ -80,6 +80,17 @@ mark {
   border-style: solid;
   border-color: #35393B; }
 
+.banner {
+  background: #DDF4F9;
+  color: #35393B;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0.5rem;
+  padding: 0.25rem;
+  border-style: solid;
+  border-color: #35393B; }
+
 sub,
 sup {
   font-size: 0.8rem;
