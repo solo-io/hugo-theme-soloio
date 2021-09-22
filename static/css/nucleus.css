@@ -80,19 +80,6 @@ mark {
   border-style: solid;
   border-color: #35393B; }
 
-.banner {
-  background: #DDF4F9;
-  color: #35393B;
-  font-weight: bold;
-  font-size: x-large;
-  text-align: center;
-  border-radius: 10px;
-  margin: 0.5rem;
-  margin-bottom: 2rem;
-  padding: 0.25rem;
-  border-style: solid;
-  border-color: #35393B; }
-
 sub,
 sup {
   font-size: 0.8rem;
@@ -550,6 +537,19 @@ h6 {
 
 p {
   margin: 1.7rem 0; }
+
+.banner {
+  background: #DDF4F9;
+  color: #35393B;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.25rem;
+  border-style: solid;
+  border-color: #35393B; }
 
 ul, ol {
   margin-top: 1.7rem;
