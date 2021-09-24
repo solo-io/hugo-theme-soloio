@@ -73,12 +73,11 @@ dfn {
 mark {
   background: #FCCCB3;
   color: #35393B;
-  border-radius: 10px;
-  margin: 0.25rem;
-  padding: 0.5rem;
-  padding-bottom: 0.25rem;
-  border-style: solid;
-  border-color: #35393B; }
+  margin: 0.1rem;
+  padding: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 5px;
+ }
 
 sub,
 sup {
