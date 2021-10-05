@@ -1,0 +1,5 @@
+{{- with .Parent -}}
+<p><img src="{{.Get "src"}}" style="{{.Get "style"}}"/></p>
+{{- else -}}
+<p><img src="{{.Get "src"}}" style="{{.Get "style"}}"/></p>
+{{- end -}}
