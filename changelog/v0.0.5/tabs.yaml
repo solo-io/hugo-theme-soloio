@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    issuelink: https://github.com/solo-io/hugo-theme-soloio/issues/43
+    description: Fix tabs to allow for internal markdown.
