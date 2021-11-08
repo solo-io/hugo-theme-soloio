@@ -16,6 +16,7 @@
 }
 
 .ui-widget.ui-widget-content a{
+  font-weight: bold;
   color: #2196c9;
 }
 
@@ -34,6 +35,7 @@
   display: none;
 }
 .ui-widget.ui-widget-content.ui-tabs .ui-tabs-nav li a {
+  font-weight: normal;
   background: #F2F2F2;
   color: #707070;
 }
