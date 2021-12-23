@@ -1,3 +1,4 @@
 changelog:
   - type: FIX
+    issuelink: https://github.com/solo-io/hugo-theme-soloio/issues/46
     description: Increases max height for featherlight images.
