@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    issueLink: https://github.com/solo-io/doctopus/issues/48
+    description: Adds a sitemap to the theme so that each doc set can be indexed.
