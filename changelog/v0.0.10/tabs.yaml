@@ -1,0 +1,3 @@
+changelog:
+  - type: FIX
+    description: Increases max height for featherlight images.
