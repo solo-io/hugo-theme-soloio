@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    issuelink: https://github.com/solo-io/doctopus/issues/57
+    description: Updates Google Analytics snippets.
