@@ -1,0 +1,3 @@
+changelog:
+  - type: FIX
+    description: Updates the link in the menu header to point to the temporary landing page site.
