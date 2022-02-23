@@ -1,0 +1,5 @@
+changelog:
+  - type: FIX
+    issuelink: https://github.com/solo-io/doctopus/issues/45
+    resolvesIssue: false
+    description: Updates the link in the menu header to point to the temporary landing page site.
