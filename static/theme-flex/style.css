@@ -428,7 +428,7 @@ h1 {
 }
 h2 {
   margin-top: 1rem 0;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 2rem;
   line-height: 2.38rem;
 }
@@ -443,10 +443,13 @@ article section.page {
   padding: 2rem 4rem;
 }
 article section.page h1:first-of-type {
+  font-size: 48px;
+  font-weight: 400;
   margin: 0rem 0rem 1rem;
   font-family: "Proxima Nova", "Novacento Sans Wide", "Helvetica", "Tahoma",
     "Geneva", "Arial", sans-serif;
-  color: #060606;
+  color: #253E58;
+  line-height: 58px;
 }
 article section.page h3 {
   margin-top: 3rem;
@@ -555,6 +558,19 @@ article section.page pre[class*="language-"] {
   -o-tab-size: 4;
   tab-size: 4;
   white-space: pre;
+}
+article section.page figure figcaption {
+  font-size: 14px;
+  font-style: normal !important;
+  color: #8693A5;
+  line-height: 20px;
+  margin: auto;
+  max-width: 800px;
+}
+article section.page .panel-heading {
+  color: #253E58;
+  font-size: 22px;
+  line-height: 28px;
 }
 
 .anchor {

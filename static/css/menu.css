@@ -4,7 +4,9 @@ article section {
 
 article > aside {
   padding-right: 0.5rem;
-  width: 21rem;
+  width: 23rem;
+  border: 1px solid #F0F1F2;
+  border-top: 0;
 }
 
 article > aside .menu {
