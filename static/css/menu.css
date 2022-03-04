@@ -24,7 +24,10 @@ article > aside .menu #topic-logo {
 }
 
 article > aside .menu #topic-logo img {
-  width: 281px;
+  max-width: 281px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
 }
 
 /* ITEMS */
@@ -110,8 +113,15 @@ article > aside .menu .dd-item.active > div * {
 }
 
 @media (max-width: 1024px) {
+  article > aside .menu #topic-logo {
+    margin-top: 25px;
+    padding-bottom: 9px;
+  }
+  article > aside .menu #topic-logo img {
+    max-height: 125px;
+  }
   article > aside .menu .dd-item {
-    margin: 6px 0 6px 2rem;
+    margin: 4px 0 4px 2rem;
   }
   article > aside .menu > .dd-item {
     margin-top: 0;
