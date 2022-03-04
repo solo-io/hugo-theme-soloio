@@ -30,17 +30,26 @@ article > aside .menu #topic-logo img {
 /* ITEMS */
 article > aside .menu .dd-item {
   color: #253E58;
-  margin-left: 2rem;
+  margin: 11px 0 11px 2rem;
+}
+article > aside .menu .dd-item.haschildren {
   margin-right: 1rem;
 }
 article > aside .menu .dd-item > div,
 article > aside .menu .dd-item ul li.dd-item > div {
-  padding-left: 5px;
-  margin-left: -5px;
   border-left: 5px solid transparent;
 }
-article > aside .menu .dd-item ul li.dd-item > div {
-  padding-left: 0;
+article > aside .menu .dd-item > div > a,
+article > aside .menu .dd-item ul li.dd-item > div > a {
+  padding-left: 5px;
+}
+article > aside .menu .dd-item > div > a:hover,
+article > aside .menu .dd-item ul li.dd-item > div > a:hover {
+  padding-left: 5px;
+}
+
+article > aside .menu > .dd-item {
+  margin-top: 17px;
 }
 
 article > aside .menu .dd-item div a {
@@ -51,6 +60,7 @@ article > aside .menu .dd-item div i.category-icon {
 }
 article > aside .menu .dd-item > ul {
   border: none;
+  margin-left: 0;
 }
 article > aside .menu .dd-item > ul li {
   border-left: none;
@@ -59,6 +69,10 @@ article > aside .menu .dd-item > ul li {
 
 article > aside .menu .dd-item.haschildren ul li {
   padding-left: 0;
+  margin-left: 16px;
+}
+article > aside .menu .dd-item.haschildren ul li.haschildren {
+  margin-right: 0;
 }
 article > aside .menu .dd-item.haschildren ul li.dd-item > div {
   padding-left: 0;
@@ -71,10 +85,6 @@ article > aside .menu .dd-item.haschildren ul li.dd-item > div a {
 article > aside .menu .dd-item.active > div,
 article > aside .menu .dd-item ul li.dd-item.active > div {
   border-left-color: #6ac7f0;
-}
-
-article > aside .menu .dd-item.parent > ul {
-  padding-left: 15px;
 }
 
 article > aside .menu .dd-item.parent div,

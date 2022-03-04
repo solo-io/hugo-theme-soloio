@@ -547,7 +547,7 @@ article section.page pre[class*="language-"] {
 }
 article section.page figure figcaption {
   font-size: 14px;
-  font-style: normal !important;
+  font-style: normal!important;
   color: #8693A5;
   line-height: 20px;
   margin: auto;
