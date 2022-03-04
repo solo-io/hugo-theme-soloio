@@ -3,44 +3,44 @@ article section {
 }
 
 article > aside {
-  padding-right: 0.5rem;
   width: 23rem;
   border: 1px solid #F0F1F2;
   border-top: 0;
+  background-color: #F8FAFB;
+  box-shadow: 0px 2px 8px #253E580B;
+  padding-top: 0;
 }
 
 article > aside .menu {
-  padding-left: 1rem;
+  margin: 0;
 }
-article > aside .menu .topic-logo {
-  margin-left: 20px;
+
+article > aside .menu #topic-logo {
+  margin-top: 41px;
+  padding-bottom: 28px;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #DBE4EC;
 }
-article > aside .menu .topic-logo img {
-  width: 250px;
-  height: 80px;
+
+article > aside .menu #topic-logo img {
+  width: 281px;
 }
 
 /* ITEMS */
 article > aside .menu .dd-item {
-  color: #adb3bc;
-  padding-left: 0.5rem;
-  margin-left: -1px;
+  color: #253E58;
+  margin-left: 2rem;
+  margin-right: 1rem;
 }
 article > aside .menu .dd-item > div,
 article > aside .menu .dd-item ul li.dd-item > div {
+  padding-left: 5px;
+  margin-left: -5px;
   border-left: 5px solid transparent;
 }
 article > aside .menu .dd-item ul li.dd-item > div {
   padding-left: 0;
-}
-
-article > aside .menu .dd-item > div {
-  margin-left: -1px;
-  padding-left: 0.75rem;
-}
-article > aside .menu .dd-item > div,
-article > aside .menu .dd-item.haschildren > div {
-  margin-left: -15px;
 }
 
 article > aside .menu .dd-item div a {
@@ -48,6 +48,9 @@ article > aside .menu .dd-item div a {
 }
 article > aside .menu .dd-item div i.category-icon {
   order: 2;
+}
+article > aside .menu .dd-item > ul {
+  border: none;
 }
 article > aside .menu .dd-item > ul li {
   border-left: none;
@@ -71,8 +74,6 @@ article > aside .menu .dd-item ul li.dd-item.active > div {
 }
 
 article > aside .menu .dd-item.parent > ul {
-  border-left: 1px dashed #d4d8de;
-  border-bottom: 1px dashed #d4d8de;
   padding-left: 15px;
 }
 

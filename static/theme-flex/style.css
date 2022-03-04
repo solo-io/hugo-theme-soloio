@@ -173,13 +173,6 @@ article > aside .menu {
   list-style-type: none;
 }
 
-article > aside .menu .topic-logo {
-  width: 250px;
-  height: 80px;
-  margin-left: 20px;
-  padding-left: 1rem;
-}
-
 article > aside .menu > label {
   display: block;
   font-family: "Proxima Nova", "Novacento Sans Wide", "Helvetica", "Tahoma",
@@ -197,11 +190,7 @@ article > aside .menu #logo img {
 article > aside .menu ul {
   display: none;
 }
-article > aside .menu > .dd-item {
-  margin: 0.5rem 0px 0.5rem 20px;
-}
 article > aside .menu .dd-item {
-  padding-left: 1rem;
   list-style: none;
   font-size: 16px;
 }
@@ -220,9 +209,6 @@ article > aside .menu .dd-item.active > div {
 article > aside .menu .dd-item.active > div * {
   font-weight: bold;
   border-bottom: dotted 1px var(--MENU-ITEM-BORDER-color);
-}
-article > aside .menu .dd-item.haschildren > div {
-  margin-left: -20px;
 }
 article > aside .menu .dd-item div {
   display: flex;
