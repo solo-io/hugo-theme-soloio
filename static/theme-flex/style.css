@@ -68,7 +68,7 @@
   --MENU-HEADER-BG-color: #f1f6f8; /* Background color of menu header */
   --MENU-HEADER-BORDER-color: #64bbe4; /* Color of menu header border */
   --MENU-ITEM-BORDER-color: #64bbe4; /* Color of underline under selected menu item */
-  --NAV_BAR_BG-color: rgb(33, 151, 202);
+  --NAV_BAR_BG-color: rgb(255, 255, 255);
 }
 
 header {
@@ -144,6 +144,7 @@ header nav.shortcuts li a {
   display: flex;
   height: 3.5rem;
   padding: 0 1rem;
+  color: #253E58;
 }
 header nav.shortcuts li a label {
   margin-bottom: 0rem;
@@ -172,13 +173,6 @@ article > aside .menu {
   list-style-type: none;
 }
 
-article > aside .menu .topic-logo {
-  width: 250px;
-  height: 80px;
-  margin-left: 20px;
-  padding-left: 1rem;
-}
-
 article > aside .menu > label {
   display: block;
   font-family: "Proxima Nova", "Novacento Sans Wide", "Helvetica", "Tahoma",
@@ -196,11 +190,7 @@ article > aside .menu #logo img {
 article > aside .menu ul {
   display: none;
 }
-article > aside .menu > .dd-item {
-  margin: 0.5rem 0px 0.5rem 20px;
-}
 article > aside .menu .dd-item {
-  padding-left: 1rem;
   list-style: none;
   font-size: 16px;
 }
@@ -219,9 +209,6 @@ article > aside .menu .dd-item.active > div {
 article > aside .menu .dd-item.active > div * {
   font-weight: bold;
   border-bottom: dotted 1px var(--MENU-ITEM-BORDER-color);
-}
-article > aside .menu .dd-item.haschildren > div {
-  margin-left: -20px;
 }
 article > aside .menu .dd-item div {
   display: flex;
@@ -427,9 +414,9 @@ h1 {
 }
 h2 {
   margin-top: 1rem 0;
-  font-weight: 500;
-  font-size: 2rem;
-  line-height: 2.38rem;
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 2.75rem;
 }
 
 article section.page {
@@ -442,10 +429,13 @@ article section.page {
   padding: 2rem 4rem;
 }
 article section.page h1:first-of-type {
+  font-size: 48px;
+  font-weight: 400;
   margin: 0rem 0rem 1rem;
   font-family: "Proxima Nova", "Novacento Sans Wide", "Helvetica", "Tahoma",
     "Geneva", "Arial", sans-serif;
-  color: #060606;
+  color: #253E58;
+  line-height: 58px;
 }
 article section.page h3 {
   margin-top: 3rem;
@@ -554,6 +544,19 @@ article section.page pre[class*="language-"] {
   -o-tab-size: 4;
   tab-size: 4;
   white-space: pre;
+}
+article section.page figure figcaption {
+  font-size: 14px;
+  font-style: normal!important;
+  color: #8693A5;
+  line-height: 20px;
+  margin: auto;
+  max-width: 800px;
+}
+article section.page .panel-heading {
+  color: #253E58;
+  font-size: 22px;
+  line-height: 28px;
 }
 
 .anchor {

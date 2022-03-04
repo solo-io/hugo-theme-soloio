@@ -1,0 +1,5 @@
+changelog:
+  - type: NON_USER_FACING
+    issuelink: https://github.com/solo-io/hugo-theme-soloio/issues/50
+    resolvesIssue: true
+    description: Updates hugo theme to match updated style spec.

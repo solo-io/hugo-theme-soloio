@@ -100,7 +100,9 @@ svg:not(:root) {
   overflow: hidden; }
 
 figure {
-  margin: 1em 40px; }
+  border: 1px solid #DBE4EC;
+  border-radius: 4px;
+  padding: 1em 40px; }
 
 hr {
   height: 0; }

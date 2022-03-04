@@ -19,6 +19,7 @@ div.notices.note {
   color: #2196C9 !important;
   border-top: 1px solid #2196C9;
   border-color: #2196C9;
+  border-radius: 4px;
 }
 div.notices.note h1, 
 div.notices.note h2, 
