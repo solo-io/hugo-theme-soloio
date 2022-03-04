@@ -1,12 +1,12 @@
 .searchbox input {
-  border: 0;
-  background: #0f7fb1;
-  color: white;
-  border-radius: 10px;
+  border: 1px solid #D4D8DE;
+  background: white;
+  color: #8693A5;
+  border-radius: 4px;
 }
 
 .searchbox input::placeholder {
-  color: white;
+  color: #8693A5;
 }
 
 

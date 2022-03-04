@@ -68,7 +68,7 @@
   --MENU-HEADER-BG-color: #f1f6f8; /* Background color of menu header */
   --MENU-HEADER-BORDER-color: #64bbe4; /* Color of menu header border */
   --MENU-ITEM-BORDER-color: #64bbe4; /* Color of underline under selected menu item */
-  --NAV_BAR_BG-color: rgb(33, 151, 202);
+  --NAV_BAR_BG-color: rgb(255, 255, 255);
 }
 
 header {
@@ -144,6 +144,7 @@ header nav.shortcuts li a {
   display: flex;
   height: 3.5rem;
   padding: 0 1rem;
+  color: #253E58;
 }
 header nav.shortcuts li a label {
   margin-bottom: 0rem;
