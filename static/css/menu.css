@@ -108,3 +108,12 @@ article > aside .menu .dd-item.active > div > * {
 article > aside .menu .dd-item.active > div * {
   border-bottom: none;
 }
+
+@media (max-width: 1024px) {
+  article > aside .menu .dd-item {
+    margin: 6px 0 6px 2rem;
+  }
+  article > aside .menu > .dd-item {
+    margin-top: 0;
+  }
+}
