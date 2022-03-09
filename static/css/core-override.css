@@ -48,6 +48,10 @@ code {
 
 pre > code {
   vertical-align: middle;
+}
+
+a > code,
+pre > code {
   border: none;
   background-color: inherit;
 }
@@ -101,7 +105,10 @@ section > ol {
 section > ol li {
   display: block;
   position: relative;
-  padding-bottom: 27px;
+}
+
+section > ol > li {
+  margin-bottom: 27px;
 }
 
 section > ol > li:before {
