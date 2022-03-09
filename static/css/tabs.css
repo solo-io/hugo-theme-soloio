@@ -4,6 +4,7 @@
 
 .ui-widget-header .ui-state-active {
     border: 1px solid #c5c5c5;
+    border-radius: 400px;
 }
 
 .ui-tabs pre {
