@@ -18,25 +18,27 @@
 }
 
 .fa.fa-clipboard,
-.fa.fa-copy {
-  background: #2196C9;
-  color: white;
+.fa.fa-clone {
+  color: #158BC2;
   text-align: center;
-  border-radius: 4px;
+  border: 1px solid #158BC2;
+  border-radius: 2px;
   min-width: 75px;
   padding: 0 .75rem;
   line-height: 2.25rem;
 }
 
 .fa.fa-clipboard,
-.fa.fa-copy {
+.fa.fa-clone {
   display: flex;
 }
 .fa.fa-clipboard:after,
-.fa.fa-copy:after {
+.fa.fa-clone:after {
+  font-size: 0.94rem;
   content: "copy";
   font-family: "Proxima Nova", "Work Sans", "Helvetica", "Tahoma", "Geneva",
   "Arial", sans-serif;
   font-weight: 500;
   margin-left: .5rem;
+  text-transform: uppercase;
 }
