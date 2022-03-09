@@ -32,11 +32,28 @@ article section {
 }
 
 article section.page {
-  padding: 3rem 7rem 3rem 7rem;
+  padding: 3rem 2rem 3rem 4.5rem;
 }
 
 img {
   max-height: 500px;
+}
+
+code {
+  vertical-align: baseline;
+  background-color: #F8FAFB;
+  border: 1px solid #DBE4EC;
+  border-radius: 4px;
+}
+
+pre > code {
+  vertical-align: middle;
+}
+
+a > code,
+pre > code {
+  border: none;
+  background-color: inherit;
 }
 
 div.featherlight img {
@@ -56,24 +73,62 @@ section ul > li {
   margin-bottom: 1rem;
 }
 
+section li > ul {
+  padding: 0;
+}
+
+article section.page > ol {
+  margin-left: 43px;
+}
+
 section ul > li:before {
-  content: " ";
+  content: " " !important;
   background: #2196c9;
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  margin-right: 1rem;
+  margin-right: 0.45rem;
   margin-top: -3px;
   display: inline-block;
 }
 
 section li p {
   display: inline;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: 0 0 18px;
 }
 
-section ul ol,
-section ul ul {
-  padding: 0 2rem;
+section ol {
+  counter-reset: item;
+  list-style-type: none;
+}
+
+section > ol {
+  padding: 0;
+  margin: 22px 0 30px;
+}
+
+section > ol li {
+  display: block;
+  position: relative;
+}
+
+section > ol > li {
+  margin-bottom: 27px;
+}
+
+section ol > li:before {
+  color: #158BC2;
+  content: counter(item) "  ";
+  counter-increment: item;
+  background-color: #DBE4EC;
+  border-radius: 50px;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  text-align: center;
+  left: -40px;
 }
 
 article section.page {
@@ -95,9 +150,9 @@ article section.page h2 {
 
 article section.page h3 {
   font-size: 1.5rem;
-  font-variant-caps: small-caps;
   margin-top: 1rem;
   line-height: 1.2;
+  font-weight: 500;
 }
 
 #version-selection-label {
