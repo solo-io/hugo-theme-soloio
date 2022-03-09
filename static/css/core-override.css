@@ -73,6 +73,10 @@ section ul > li {
   margin-bottom: 1rem;
 }
 
+section li > ul {
+  padding: 0;
+}
+
 article section.page > ol {
   margin-left: 43px;
 }
