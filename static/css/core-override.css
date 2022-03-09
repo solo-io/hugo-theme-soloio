@@ -99,9 +99,12 @@ section li p {
   margin: 0 0 18px;
 }
 
-section > ol {
+section ol {
   counter-reset: item;
   list-style-type: none;
+}
+
+section > ol {
   padding: 0;
   margin: 22px 0 30px;
 }
@@ -115,7 +118,7 @@ section > ol > li {
   margin-bottom: 27px;
 }
 
-section > ol > li:before {
+section ol > li:before {
   color: #158BC2;
   content: counter(item) "  ";
   counter-increment: item;
