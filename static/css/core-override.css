@@ -101,6 +101,7 @@ section > ol {
 section > ol li {
   display: block;
   position: relative;
+  padding-bottom: 27px;
 }
 
 section > ol > li:before {
