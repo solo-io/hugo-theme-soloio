@@ -514,6 +514,7 @@ article section.page pre {
   border-radius: 4px;
 }
 article section.page pre .copy-to-clipboard {
+  background-color: white;
   float: right;
   position: relative;
   right: 0px;
