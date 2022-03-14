@@ -70,10 +70,9 @@ section ul {
 }
 section ul > li {
   align-items: center;
-  margin-bottom: 1rem;
 }
 
-section li > ul {
+section > ol > li > ul {
   padding: 0;
 }
 
@@ -112,6 +111,7 @@ section > ol {
 section > ol li {
   display: block;
   position: relative;
+  margin-bottom: 1rem;
 }
 
 section > ol > li {
