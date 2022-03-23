@@ -80,6 +80,11 @@ article section.page > ol {
   margin-left: 43px;
 }
 
+article section.page .ui-widget-content ol {
+  margin-left: 43px;
+  padding: 0;
+}
+
 section ul > li:before {
   content: " " !important;
   background: #2196c9;
@@ -108,7 +113,7 @@ section > ol {
   margin: 22px 0 30px;
 }
 
-section > ol li {
+section ol li {
   display: block;
   position: relative;
   margin-bottom: 1rem;
