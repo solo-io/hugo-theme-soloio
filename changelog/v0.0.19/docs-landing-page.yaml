@@ -1,0 +1,3 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Change the landing page link back to docs.solo.io
