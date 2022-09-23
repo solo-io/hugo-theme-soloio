@@ -1,0 +1,5 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Update the header logo size and PNG so the font shows up in other browsers like Firefox.
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise/issues/5349
+    resolvesIssue: false
