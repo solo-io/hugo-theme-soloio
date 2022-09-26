@@ -21,7 +21,6 @@
 <link href="{{ .Site.Data.Solo.DocsVersion }}{{"css/auto-complete.css" | relURL}}" rel="stylesheet">
 <link href="{{(printf "theme-%s/style.css" (.Site.Params.themeStyle| default "flex")  ) | relURL}}" rel="stylesheet">
 {{with .Site.Params.themeVariant}}
-<link href="{{ .Site.Data.Solo.DocsVersion }}{{(printf "theme-%s/variant-%s.css" ($.Site.Params.themeStyle| default "flex") .) | relURL}}" rel="stylesheet">
 {{end}}
 <link rel="stylesheet" href="{{ .Site.Data.Solo.DocsVersion }}{{"css/bootstrap.min.css" | relURL}}">
 <script src="{{ .Site.Data.Solo.DocsVersion }}{{"js/jquery-3.2.1.min.js" | relURL}}"></script>
