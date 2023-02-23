@@ -1,0 +1,5 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Adds Docsy feedback widget capabilities.
+    issueLink: Partly addresses https://github.com/solo-io/doctopus/issues/38
+    resolvesIssue: false
