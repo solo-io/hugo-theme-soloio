@@ -1,0 +1,3 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Changes the header image to the Solo logo. Based on Slack https://solo-io-corp.slack.com/archives/CHJV572TG/p1677100178122039
