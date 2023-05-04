@@ -1,0 +1,5 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Add Marketo analytics code to header.
+    issueLink: https://github.com/solo-io/doctopus/issues/82
+    resolvesIssue: false
