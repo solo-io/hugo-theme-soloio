@@ -1,0 +1,5 @@
+changelog:
+  - type: FIX
+    issueLink: https://github.com/solo-io/doctopus/issues/86
+    resolvesIssue: false
+    description: Updates Google Analytics snippet for GA4.
