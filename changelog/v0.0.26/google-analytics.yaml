@@ -1,0 +1,3 @@
+changelog:
+  - type: FIX
+    description: Updates Google Analytics snippet for GA4.
