@@ -1,0 +1,5 @@
+changelog:
+  - type: FIX
+    issueLink: https://github.com/solo-io/doctopus/issues/86
+    resolvesIssue: false
+    description: Updates to use Google Tag Manager (GTM) which contains the GA4 tag.
