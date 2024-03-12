@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    resolvesIssue: false
+    description: Adds link shortcode so that we can migrate more easily to the new theme. 
