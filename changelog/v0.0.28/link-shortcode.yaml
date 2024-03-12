@@ -1,4 +1,5 @@
 changelog:
   - type: FIX
     resolvesIssue: false
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise/issues/14599
     description: Adds link shortcode so that we can migrate more easily to the new theme. 
