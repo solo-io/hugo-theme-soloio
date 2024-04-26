@@ -61,7 +61,7 @@ class MarkdownRenderer {
   }
 
   renderMarkdown(showOSNotes) {
-    let extensions = ['auto-url'];
+    let extensions = [];
     if (!this.discludeHeaderAnchors) {
       extensions.push('header-anchors');
     }
@@ -201,7 +201,7 @@ class VersionComparer {
     const renderer = new showdown.Converter({
       headerLevelStart: 3,
       prefixHeaderId: this.headerIdPrefix+HASH_SEPARATOR,
-      extensions: ['auto-url']
+      extensions: []
     });
     return renderer.makeHtml(markdown);
   }
