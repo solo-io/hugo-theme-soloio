@@ -1,0 +1,3 @@
+changelog:
+  - type: NON_USER_FACING
+    description: Upgrades the jquery UI version to fix security issues with outdated jquery version.
