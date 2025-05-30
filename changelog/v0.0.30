@@ -1,4 +1,0 @@
-changelog:
-  - type: FIX
-    resolvesIssue: false
-    description: Upgrades the jquery version to fix security issues with outdated jquery version.
